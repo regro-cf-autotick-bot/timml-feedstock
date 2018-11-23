@@ -23,6 +23,7 @@ requirements:
   host:
     - m2w64-toolchain  # [win]
     - libpython  # [win]
+    - libgfortran  # [linux]
     - python 
     - numpy >=1.12 
     - scipy
