@@ -25,13 +25,14 @@ requirements:
     - libpython  # [win]
     - python 
     - numpy >=1.12 
-    - scipy
+    - scipy >=0.19
     - matplotlib >=2.0
   run:
    - python 
    - {{ pin_compatible('numpy') }} 
-   - scipy
+   - scipy >=0.19
    - matplotlib >=2.0
+   - libgfortran
 
 test:
   imports:
