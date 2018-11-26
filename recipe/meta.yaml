@@ -11,7 +11,7 @@ source:
   sha256: {{ sha256 }}
 
 build:
-  number: 0
+  number: 1000
   skip: True  # [py<35]
   script: python setup.py install 
 
@@ -23,15 +23,17 @@ requirements:
   host:
     - m2w64-toolchain  # [win]
     - libpython  # [win]
+    - libgfortran  # [linux or osx]
     - python 
     - numpy >=1.12 
-    - scipy
+    - scipy >=0.19
     - matplotlib >=2.0
   run:
    - python 
    - {{ pin_compatible('numpy') }} 
-   - scipy
+   - scipy >=0.19
    - matplotlib >=2.0
+   - libgfortran  # [linux or osx]
 
 test:
   imports:
