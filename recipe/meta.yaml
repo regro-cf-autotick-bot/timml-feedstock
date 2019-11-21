@@ -1,19 +1,17 @@
-{% set name = "timml" %}
 {% set version = "5.0.1" %}
-{% set sha256 = "2790663285e22e5a58dfe38f16166c0b09b610890205d98996fd0c72491cbb18" %}
 
 package:
-   name: {{ name|lower }}
+   name: timml
    version: {{ version }}
 
 source:
-  url: https://github.com/mbakker7/{{ name }}/archive/{{ version }}.tar.gz
-  sha256: {{ sha256 }}
+  url: https://github.com/mbakker7/timml/archive/{{ version }}.tar.gz
+  sha256: 2790663285e22e5a58dfe38f16166c0b09b610890205d98996fd0c72491cbb18
 
 build:
   number: 1002
   skip: True  # [py<35]
-  script: python setup.py install 
+  script: "{{ PYTHON }} -m pip install . --no-deps -vv"
 
 requirements:
   build:
@@ -21,17 +19,18 @@ requirements:
     - {{ compiler('m2w64_c') }}  # [win]
     - {{ compiler('m2w64_fortran') }}  # [win]
   host:
+    - python
+    - pip
     - m2w64-toolchain  # [win]
     - libpython  # [win]
-    - python 
-    - numpy >=1.12 
+    - numpy
     - scipy >=0.19
-    - matplotlib >=2.0
+    - matplotlib-base >=2.0
   run:
    - python 
    - {{ pin_compatible('numpy') }} 
    - scipy >=0.19
-   - matplotlib >=2.0
+   - matplotlib-base >=2.0
 
 test:
   imports:
