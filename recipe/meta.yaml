@@ -1,36 +1,32 @@
-{% set version = "5.0.1" %}
+{% set version = "6.0.1" %}
 
 package:
-   name: timml
-   version: {{ version }}
+  name: timml
+  version: {{ version }}
 
 source:
-  url: https://github.com/mbakker7/timml/archive/{{ version }}.tar.gz
-  sha256: 2790663285e22e5a58dfe38f16166c0b09b610890205d98996fd0c72491cbb18
+  url: https://github.com/mbakker7/timml/archive/v{{ version }}.tar.gz
+  sha256: 6bea2fdb4a81a9511ee4bd75db4a7ce090244da0dd6c72926a3e1d8ab7914e92
 
 build:
-  number: 1003
-  skip: True  # [py<35]
-  script: "{{ PYTHON }} -m pip install . --no-deps -vv"
+  number: 0
+  skip: true  # [py<35]
+  script: {{ PYTHON }} -m pip install . --no-deps -vv
 
 requirements:
-  build:
-    - {{ compiler('fortran') }}
-    - {{ compiler('m2w64_c') }}  # [win]
-    - {{ compiler('m2w64_fortran') }}  # [win]
   host:
     - python
     - pip
-    - m2w64-toolchain  # [win]
-    - libpython  # [win]
-    - numpy
+    - numba >=0.50.1
+    - numpy >=1.15
     - scipy >=0.19
     - matplotlib-base >=2.0
   run:
-   - python 
-   - {{ pin_compatible('numpy') }} 
-   - scipy >=0.19
-   - matplotlib-base >=2.0
+    - python
+    - {{ pin_compatible('numpy') }}
+    - numba >=0.50.1
+    - scipy >=0.19
+    - matplotlib-base >=2.0
 
 test:
   imports:
@@ -40,9 +36,9 @@ about:
   home: https://github.com/mbakker7/timml
   license: MIT
   license_file: LICENSE
-  summary: 'TimML is a multi-layer analytic element model'
+  summary: TimML is a multi-layer analytic element model
   dev_url: https://github.com/mbakker7/timml
-  
+
 extra:
   recipe-maintainers:
     - mbakker7
